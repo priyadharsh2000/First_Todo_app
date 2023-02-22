@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js">
+    </script>
+
+</head>
+
+
+
+<body>
+
+    <div style="margin-top: 50px;" class="ui container">
+        <div class="ui container center aligned">
+            <h1 class="ui center aligned header">To Do App</h1>
+
+            <form class="ui form" action="/add" method="post">
+                <div class="field">
+                    <label>Todo Title</label>
+                    <input type="text" name="title" placeholder="Enter Todo..."><br>
+                </div>
+
+                <div class="ui button">
+                    <details>
+                        <summary>Tips</summary>
+                        <p>
+                            This to-do list app helps you to organize your work and increase productivity. Here are points to keep in mind
+                            before creating list.
+                        </p>
+                        <ul>
+                            <li>Sort your list by priority</li>
+                            <li>Be more specific in defining your task</li>
+                            <li>Verbs first, details Later ex: Draw two portrait</li>
+                            <li>Break big work into Smaller tasks</li>
+                            <li>Celebrate your progress</li>
+                        </ul>
+                    </details>
+                </div>
+
+
+
+                <button class="ui blue button" type="submit">Add</button>
+
+            </form>
+        </div>
+        <hr>
+
+        {% for todo in todo_list %}
+        <div class="equal width grid">
+            <div class="ui violet segment">
+                <p class="ui massive message">{{todo.id }} | {{ todo.title }}</p>
+
+                {% if todo.complete == False %}
+
+                <span class="ui gray label">Not Complete</span>
+
+                {% else %}
+
+                <span class="ui green label">Completed</span>
+
+                {% endif %}
+
+                <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
+                <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+
+            </div>
+        </div>
+        {% endfor %}
+        <div>
+            <h4 class="ui horizontal header divider">
+                <a href="#">Back to Main</a>
+            </h4>
+            <hr>
+            <br />
+            <h3 class="ui header center aligned">Do you have so many things to do?</h3>
+        </div>
+        <div class="ui blue segment">
+            <p>
+                Every one has a different approach in completing their work. Try to explore your best
+                method. Click the below button to know some techniques
+            </p>
+
+            </div>
+        <hr>
+        <br />
+        <div class="ui basic modal">
+            <div class="ui segment">
+                <div class="ui header">
+                    <h1>Some popular Techniques</h1>
+                </div>
+                
+                <div class="ui large message">
+                    <h2>ABCDE method</h2>
+                    <p>
+                        The ABCDE method is comparable to giving grades to your tasks,
+                        from A (very important) down to E (eliminate whenever possible)
+                    </p>
+                    <ul>
+                        <li>Take that task list you’ve created</li>
+                        <li>
+                            Assign each task a letter value according to its level of importance,<br>
+                            with A tasks being top priority and E tasks being low priority
+                        </li>
+                        <li>Tackle tasks accordingly</li>
+                    </ul>
+                </div>
+                <div class="ui large message">
+                    <h2>Chunking</h2>
+                    <p>
+                        A chunk is defined as a focused work activity.
+                        It can be self-contained (emptying your inbox),
+                        a slice of a larger project (completing the first draft of a document),
+                        or a collection of small, unrelated tasks. Your key here is to make these
+                        chunks focused, uninterrupted blocks of time
+                    </p>
+                </div>
+                <div class="ui large message">
+                    <h2>Eat the frog</h2>
+                    <p>
+                        The eat the frog method is not a literal suggestion, but rather a system based on a quote from the ever-wise Mark Twain.
+                        He said, “If it’s your job to eat a frog, it’s best to do it first thing in the morning.” In the world of project management,
+                        that translates to tackling big or complex tasks first before moving on to less important or time-sensitive tasks.
+                    </p>
+                </div>
+
+
+            </div>
+            <div class="actions">
+                <div class="ui positive button">
+                    Got it
+                </div>
+            </div>
+        </div>
+        <button class="ui button"
+                onclick="openModal()">
+            <div class="center aligned ">
+                Click Me
+            </div>
+            
+        </button>
+    </div>
+
+    <script>
+        const openModal = () => {
+            $('.ui.modal').modal('setting',
+                'transition', 'horizontal flip').modal('show');
+        }
+    </script>
+
+
+
+
+    
+
+
+
+    </div>
+</body>
+
+</html>
